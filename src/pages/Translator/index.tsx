@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, AnimationContainer } from "./styles";
 
 import { useForm } from "react-hook-form";
@@ -12,6 +12,7 @@ interface TranslationFormat {
 const Translator: React.FC = () => {
   const { register, handleSubmit } = useForm();
 
+  const [counter, setCounter] = useState(Number);
   const [translations, setTranslations] = useState("");
   const [translationsHistory, setTranslationsHistory] = useState<
     TranslationFormat[]
@@ -29,7 +30,9 @@ const Translator: React.FC = () => {
     });
   };
 
-  console.log(translationsHistory);
+  useEffect(() => {
+    setCounter(translationsHistory.length);
+  }, [translationsHistory]);
 
   return (
     <>
@@ -39,8 +42,9 @@ const Translator: React.FC = () => {
             <h1>Numbers in English</h1>
 
             <input
+              type="number"
               name="number"
-              placeholder="Type a natural number for its translation"
+              placeholder="Natural number"
               ref={register}
             />
 
@@ -57,6 +61,8 @@ const Translator: React.FC = () => {
               ))}
             </ul>
           </div>
+
+          <h2>{`You have translated ${counter} numbers so far.`}</h2>
         </AnimationContainer>
       </Container>
     </>
