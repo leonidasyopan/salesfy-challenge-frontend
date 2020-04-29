@@ -14,7 +14,6 @@ export default createGlobalStyle`
   body, input, button {
     font-family: 'Titillium Web', sans-serif;
     font-size: 16px;
-    background: #3E2C3E;
   }
   button {
     cursor: pointer;
