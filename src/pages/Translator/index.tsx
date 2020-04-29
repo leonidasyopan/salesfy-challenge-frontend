@@ -5,24 +5,15 @@ import { useForm } from "react-hook-form";
 
 import api from "../../services/api";
 
-interface TranslationFormat {
-  translate: string;
-}
-
 const Translator: React.FC = () => {
   const { register, handleSubmit } = useForm();
 
-  const [translations, setTranslations] = useState<TranslationFormat[]>([]);
+  const [translations, setTranslations] = useState("");
 
   const onSubmit = async (data: any) => {
-    console.log(data);
-    console.log(data[0]);
     await api.get(`/?translate=${data.number}`).then((response) => {
-      console.log(response.data);
-      setTranslations(response.data.translate);
+      setTranslations(response.data.translation);
     });
-
-    console.log(translations);
   };
 
   return (
@@ -33,7 +24,7 @@ const Translator: React.FC = () => {
             <h1>Numbers in English</h1>
 
             <input
-              name="number "
+              name="number"
               placeholder="Type a natural number for its translation"
               ref={register}
             />
@@ -41,11 +32,7 @@ const Translator: React.FC = () => {
             <button type="submit">Translate</button>
           </form>
 
-          {/* <ul>
-            {translations.map((translation) => (
-              <li>{translation.translate}</li>
-            ))}
-          </ul> */}
+          {translations}
         </AnimationContainer>
       </Container>
     </>
