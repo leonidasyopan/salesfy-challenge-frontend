@@ -62,7 +62,11 @@ const Translator: React.FC = () => {
             </ul>
           </div>
 
-          <h2>{`You have translated ${counter} numbers so far.`}</h2>
+          <h2>{`There ${
+            translationsHistory.length > 1 ? "are" : "is"
+          } ${counter} ${
+            translationsHistory.length > 1 ? "numbers" : "number"
+          } translated.`}</h2>
         </AnimationContainer>
       </Container>
     </>
