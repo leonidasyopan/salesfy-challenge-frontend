@@ -38,9 +38,15 @@ const Translator: React.FC = () => {
     <>
       <Container>
         <AnimationContainer>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h1>Numbers in English</h1>
+          <h1>Numbers in English</h1>
 
+          <p>{`There ${
+            translationsHistory.length !== 1 ? "are" : "is"
+          } ${counter} ${
+            translationsHistory.length !== 1 ? "numbers" : "number"
+          } translated.`}</p>
+
+          <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="number"
               name="number"
@@ -51,8 +57,6 @@ const Translator: React.FC = () => {
             <button type="submit">Translate</button>
           </form>
 
-          {translations}
-
           <div>
             <h2>Former Translations</h2>
             <ul>
@@ -61,12 +65,6 @@ const Translator: React.FC = () => {
               ))}
             </ul>
           </div>
-
-          <h2>{`There ${
-            translationsHistory.length > 1 ? "are" : "is"
-          } ${counter} ${
-            translationsHistory.length > 1 ? "numbers" : "number"
-          } translated.`}</h2>
         </AnimationContainer>
       </Container>
     </>
