@@ -12,7 +12,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased
   }
   body, input, button {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-size: 20px;
   }
   button {

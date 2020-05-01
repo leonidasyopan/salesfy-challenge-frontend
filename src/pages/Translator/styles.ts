@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-
 import { shade } from "polished";
 
 export const Container = styled.div`
@@ -197,6 +196,7 @@ export const AnimationContainerRight = styled.div`
         margin: 2px 0;
         background: #fff;
         min-height: 80px;
+        flex: 1;
       }
 
       li:nth-of-type(n + 1) {
@@ -207,6 +207,11 @@ export const AnimationContainerRight = styled.div`
       }
       li:nth-of-type(3n + 1) {
         color: #97cb31;
+      }
+
+      li.equalToCounter {
+        background: #f35a5d;
+        color: #fff;
       }
     }
   }

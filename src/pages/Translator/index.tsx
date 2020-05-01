@@ -4,9 +4,7 @@ import {
   AnimationContainerLeft,
   AnimationContainerRight,
 } from "./styles";
-
 import { useForm } from "react-hook-form";
-
 import api from "../../services/api";
 
 interface TranslationFormat {
@@ -21,6 +19,7 @@ const Translator: React.FC = () => {
   const { register, handleSubmit, errors } = useForm();
 
   const [counter, setCounter] = useState(Number);
+  const [counterTranslation, setCounterTranslation] = useState("");
   const [naturalNumbers, setNaturalNumbers] = useState<NaturalNumbersFormat[]>(
     []
   );
@@ -43,8 +42,16 @@ const Translator: React.FC = () => {
   };
 
   useEffect(() => {
+    api.get(`/?translate=${counter}`).then((response) => {
+      setCounterTranslation(response.data.translation);
+    });
+  }, [counter]);
+
+  useEffect(() => {
     setCounter(translationsHistory.length);
   }, [translationsHistory]);
+
+  console.log(counter);
 
   return (
     <Container>
@@ -76,7 +83,7 @@ const Translator: React.FC = () => {
             <div id="current-translation">{translations}</div>
             <h3>{`There ${
               translationsHistory.length !== 1 ? "are" : "is"
-            } ${counter} ${
+            } ${counterTranslation} ${
               translationsHistory.length !== 1 ? "numbers" : "number"
             } translated.`}</h3>
           </section>
@@ -92,7 +99,7 @@ const Translator: React.FC = () => {
                   translationsHistory.map((translation, index) => (
                     <li
                       className={
-                        counter === naturalNumbers[index].number
+                        Number(counter) === Number(naturalNumbers[index].number)
                           ? "equalToCounter"
                           : "regularLI"
                       }
