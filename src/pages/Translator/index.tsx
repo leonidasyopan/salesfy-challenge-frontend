@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Container, AnimationContainer } from "./styles";
+import {
+  Container,
+  AnimationContainerLeft,
+  AnimationContainerRight,
+} from "./styles";
 
 import { useForm } from "react-hook-form";
 
@@ -35,39 +39,55 @@ const Translator: React.FC = () => {
   }, [translationsHistory]);
 
   return (
-    <>
-      <Container>
-        <AnimationContainer>
-          <h1>Numbers in English</h1>
+    <Container>
+      <header>
+        <h1>Numbers in English | Translator</h1>
+      </header>
+      <div id="content">
+        <AnimationContainerLeft>
+          <section>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <label htmlFor="number">
+                Provide a natural number for translation
+              </label>
+              <input
+                type="number"
+                name="number"
+                placeholder="Natural number"
+                ref={register}
+              />
 
-          <p>{`There ${
-            translationsHistory.length !== 1 ? "are" : "is"
-          } ${counter} ${
-            translationsHistory.length !== 1 ? "numbers" : "number"
-          } translated.`}</p>
+              <button type="submit">Translate</button>
+            </form>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-              type="number"
-              name="number"
-              placeholder="Natural number"
-              ref={register}
-            />
-
-            <button type="submit">Translate</button>
-          </form>
-
-          <div>
-            <h2>Former Translations</h2>
-            <ul>
-              {translationsHistory.map((translation, index) => (
-                <li key={index}>{translation.translation}</li>
-              ))}
-            </ul>
-          </div>
-        </AnimationContainer>
-      </Container>
-    </>
+            <p>Your current translation</p>
+            <div id="current-translation"></div>
+            <p>{`There ${
+              translationsHistory.length !== 1 ? "are" : "is"
+            } ${counter} ${
+              translationsHistory.length !== 1 ? "numbers" : "number"
+            } translated.`}</p>
+          </section>
+        </AnimationContainerLeft>
+        <AnimationContainerRight>
+          <section>
+            <div id="translation-history">
+              <h2>Former Translations</h2>
+              <ul>
+                {translationsHistory.map((translation, index) => (
+                  <li key={index}>{translation.translation}</li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        </AnimationContainerRight>
+      </div>
+      <footer>
+        <div></div>
+        <div></div>
+        <div></div>
+      </footer>
+    </Container>
   );
 };
 
