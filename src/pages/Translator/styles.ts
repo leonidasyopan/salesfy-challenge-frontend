@@ -94,7 +94,7 @@ export const AnimationContainerLeft = styled.div`
       input {
         display: block;
         width: 100%;
-        height: 80px;
+        height: 70px;
         border-radius: 10px;
         padding: 10px 20px;
         font-size: 40px;
@@ -110,6 +110,11 @@ export const AnimationContainerLeft = styled.div`
           padding-right: 20px;
           margin-left: 40px;
         }
+      }
+
+      span {
+        margin-top: 5px;
+        color: #c53030;
       }
 
       button {
@@ -136,7 +141,7 @@ export const AnimationContainerLeft = styled.div`
     }
 
     #current-translation {
-      margin: 10px 0 120px 0;
+      margin: 10px 0 90px 0;
       width: 100%;
       height: 200px;
       background: #fff;

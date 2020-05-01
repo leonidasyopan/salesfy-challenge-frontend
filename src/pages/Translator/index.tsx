@@ -13,16 +13,24 @@ interface TranslationFormat {
   translation: string;
 }
 
+interface NaturalNumbersFormat {
+  number: Number;
+}
+
 const Translator: React.FC = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const [counter, setCounter] = useState(Number);
+  const [naturalNumbers, setNaturalNumbers] = useState<NaturalNumbersFormat[]>(
+    []
+  );
   const [translations, setTranslations] = useState("");
   const [translationsHistory, setTranslationsHistory] = useState<
     TranslationFormat[]
   >([]);
 
   const onSubmit = async (data: any) => {
+    setNaturalNumbers([{ number: data.number }, ...naturalNumbers]);
     await api.get(`/?translate=${data.number}`).then((response) => {
       setTranslations(response.data.translation);
       setTranslationsHistory([
@@ -41,7 +49,7 @@ const Translator: React.FC = () => {
   return (
     <Container>
       <header>
-        <h1>Numbers in English | Translator</h1>
+        <h1>Numbers in English</h1>
       </header>
       <div id="content">
         <AnimationContainerLeft>
@@ -50,7 +58,16 @@ const Translator: React.FC = () => {
               <label htmlFor="number">
                 Provide a natural number for translation:
               </label>
-              <input type="number" name="number" ref={register} />
+              <input
+                type="number"
+                name="number"
+                ref={register({ required: true })}
+              />
+              {errors.number && (
+                <span className="error-message">
+                  You need to type a natural number. Please, try again!
+                </span>
+              )}
 
               <button type="submit">Translate</button>
             </form>
@@ -73,7 +90,16 @@ const Translator: React.FC = () => {
                   <li></li>
                 ) : (
                   translationsHistory.map((translation, index) => (
-                    <li key={index}>{translation.translation}</li>
+                    <li
+                      className={
+                        counter === naturalNumbers[index].number
+                          ? "equalToCounter"
+                          : "regularLI"
+                      }
+                      key={index}
+                    >
+                      {naturalNumbers[index].number} = {translation.translation}
+                    </li>
                   ))
                 )}
               </ul>
