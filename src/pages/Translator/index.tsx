@@ -26,10 +26,10 @@ const Translator: React.FC = () => {
     await api.get(`/?translate=${data.number}`).then((response) => {
       setTranslations(response.data.translation);
       setTranslationsHistory([
-        ...translationsHistory,
         {
           translation: response.data.translation,
         },
+        ...translationsHistory,
       ]);
     });
   };
@@ -48,25 +48,20 @@ const Translator: React.FC = () => {
           <section>
             <form onSubmit={handleSubmit(onSubmit)}>
               <label htmlFor="number">
-                Provide a natural number for translation
+                Provide a natural number for translation:
               </label>
-              <input
-                type="number"
-                name="number"
-                placeholder="Natural number"
-                ref={register}
-              />
+              <input type="number" name="number" ref={register} />
 
               <button type="submit">Translate</button>
             </form>
 
-            <p>Your current translation</p>
-            <div id="current-translation"></div>
-            <p>{`There ${
+            <p>Your current translation:</p>
+            <div id="current-translation">{translations}</div>
+            <h3>{`There ${
               translationsHistory.length !== 1 ? "are" : "is"
             } ${counter} ${
               translationsHistory.length !== 1 ? "numbers" : "number"
-            } translated.`}</p>
+            } translated.`}</h3>
           </section>
         </AnimationContainerLeft>
         <AnimationContainerRight>
@@ -74,9 +69,13 @@ const Translator: React.FC = () => {
             <div id="translation-history">
               <h2>Former Translations</h2>
               <ul>
-                {translationsHistory.map((translation, index) => (
-                  <li key={index}>{translation.translation}</li>
-                ))}
+                {translationsHistory.length === 0 ? (
+                  <li></li>
+                ) : (
+                  translationsHistory.map((translation, index) => (
+                    <li key={index}>{translation.translation}</li>
+                  ))
+                )}
               </ul>
             </div>
           </section>
