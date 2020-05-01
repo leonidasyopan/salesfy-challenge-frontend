@@ -150,7 +150,7 @@ export const AnimationContainerLeft = styled.div`
       display: flex;
       align-items: center;
       overflow-y: auto;
-      color: #97cb31;
+      color: #f15a5b;
     }
 
     h3 {
