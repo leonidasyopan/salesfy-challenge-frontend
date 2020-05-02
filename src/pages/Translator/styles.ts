@@ -243,6 +243,7 @@ export const AnimationContainerRight = styled.div`
         background: #fff;
         min-height: 80px;
         flex: 1;
+        overflow-wrap: break-word;
       }
 
       li:nth-of-type(n + 1) {
