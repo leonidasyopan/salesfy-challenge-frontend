@@ -1,5 +1,11 @@
+// Styled components helps at being able to use traditional CSS
+// when we create a Component
 import styled, { keyframes } from "styled-components";
+// Shade from polished allows to easity shade any color by small %
 import { shade } from "polished";
+// This is a simple tile pattern to customize background a little
+// It's very discrete, but it makes a difference on the eyes.
+import backgroundImage from "../../assets/blizzard.png";
 
 export const Container = styled.div`
   background: #f5f5f5;
@@ -9,6 +15,7 @@ export const Container = styled.div`
   grid-template-rows: 11% auto 4%;
   align-content: stretch;
   color: #767676;
+  background: #f0f2f5 url(${backgroundImage});
 
   header {
     grid-column: 1 / span 4;
@@ -46,6 +53,8 @@ export const Container = styled.div`
   }
 `;
 
+// These are simple animations for the entrance of the
+// elements when the page first loads
 const appearFromLeft = keyframes`
   from {
     opacity: 0;
@@ -56,7 +65,6 @@ const appearFromLeft = keyframes`
     transform: translateX(0)
   }
 `;
-
 const appearFromRight = keyframes`
   from {
     opacity: 0;
@@ -195,6 +203,8 @@ export const AnimationContainerRight = styled.div`
     div {
       max-height: 56vh;
       overflow-y: auto;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
 
       /* Especiall scrollbar */
       ::-webkit-scrollbar {
@@ -234,8 +244,6 @@ export const AnimationContainerRight = styled.div`
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
 
       li {
         padding: 20px 50px;
@@ -246,6 +254,8 @@ export const AnimationContainerRight = styled.div`
         overflow-wrap: break-word;
       }
 
+      /* This small code allows us to have different colors
+      at different items of the list */
       li:nth-of-type(n + 1) {
         color: #fdb834;
       }

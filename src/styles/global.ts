@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+/* Some resetting to the CSS so we can
+style it ourselves */
 export default createGlobalStyle`
   * {
     margin: 0;
