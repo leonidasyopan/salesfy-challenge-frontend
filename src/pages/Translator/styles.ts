@@ -101,7 +101,7 @@ export const AnimationContainerLeft = styled.div`
       input {
         display: block;
         width: 100%;
-        height: 70px;
+        height: 80px;
         border-radius: 10px;
         padding: 10px 20px;
         font-size: 40px;
