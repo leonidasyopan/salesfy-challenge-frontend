@@ -29,7 +29,11 @@ const Translator: React.FC = () => {
   >([]);
 
   const onSubmit = async (data: any) => {
-    setNaturalNumbers([{ number: data.number }, ...naturalNumbers]);
+    const numberWithCommas = data.number
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    setNaturalNumbers([{ number: numberWithCommas }, ...naturalNumbers]);
     await api.get(`/?translate=${data.number}`).then((response) => {
       setTranslations(response.data.translation);
       setTranslationsHistory([
@@ -70,10 +74,12 @@ const Translator: React.FC = () => {
                 name="number"
                 ref={register({ required: true })}
               />
-              {errors.number && (
+              {errors.number ? (
                 <span className="error-message">
                   You need to type a natural number. Please, try again!
                 </span>
+              ) : (
+                <span className="error-message-transparent">No errors</span>
               )}
 
               <button type="submit">Translate</button>
@@ -83,15 +89,15 @@ const Translator: React.FC = () => {
             <div id="current-translation">{translations}</div>
             <h3>{`There ${
               translationsHistory.length !== 1 ? "are" : "is"
-            } ${counterTranslation} ${
+            } ${counter} (${counterTranslation}) ${
               translationsHistory.length !== 1 ? "numbers" : "number"
             } translated.`}</h3>
           </section>
         </AnimationContainerLeft>
         <AnimationContainerRight>
           <section>
+            <h2>Former Translations</h2>
             <div id="translation-history">
-              <h2>Former Translations</h2>
               <ul>
                 {translationsHistory.length === 0 ? (
                   <li></li>
