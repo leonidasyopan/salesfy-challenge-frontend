@@ -29,7 +29,7 @@ Este é o projeto de desafio Salesfy, etapa Frontend.
 Para instalação, rodar o comando:
 
 ```
-_\$ npm install
+_\$ yarn
 ```
 
 Para rodar o projeto, execute:
